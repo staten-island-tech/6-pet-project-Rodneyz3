@@ -1,0 +1,10 @@
+class pet:
+    def __init__(self, height, size, hunger):
+        self.height=height
+        self.size=size
+        self.hunger=hunger
+    
+    
+
+
+
