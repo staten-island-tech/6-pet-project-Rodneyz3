@@ -1,9 +1,28 @@
-class pet:
-    def __init__(self, height, size, hunger):
-        self.height=height
-        self.size=size
-        self.hunger=hunger
+def login(email,password):
+    if isinstance(email, str) == False:
+        return "Must be a string"
+    if "@" not in email:
+        return "Must have @"
+    if isinstance(password,str) == False:
+        return "Password must be a string"
+    if len(password) < 8:
+        return "Must be at least 8 letters"
+    for char in password:
+        if char.isdigit == False:
+            return "Must have at least one number"
+    for char in password:
+        if char.isupper == False:
+            return "Must have at least one uppercase letter"
+    if isinstance(email, str) == True and isinstance(password,str) == True and len(password) <= 8 and char.isdigit == True and char.isupper == True:
+        return {
+            email: email
+            
+        }
+        
     
+    
+    
+
     
 
 
