@@ -1,0 +1,49 @@
+class battlecat:
+    def __init__(self, name):
+        self.name = name
+        self.hunger = 50
+        self.energy = 50
+        self.happiness = 50
+        self.health = 100
+
+    def feed(self):
+        print(f"You feed {self.name}.")
+        self.hunger = max(0, self.hunger - 20)
+        self.happiness = min(100, self.happiness + 5)
+
+    def play(self):
+        print(f"You play with {self.name}.")
+        if self.energy <= 10:
+            print(f"{self.name} is too tired to play!")
+            return
+        self.happiness = min(100, self.happiness + 15)
+        self.energy = max(0, self.energy - 10)
+        self.hunger = min(100, self.hunger + 10)
+
+    def rest(self):
+        print(f"{self.name} is resting...")
+        self.energy = min(100, self.energy + 25)
+        self.hunger = min(100, self.hunger + 5)
+
+    def tick(self):
+        self.hunger = min(100, self.hunger + 5)
+        self.energy = max(0, self.energy - 5)
+        self.happiness = max(0, self.happiness - 3)
+
+       
+        if self.hunger > 80:
+            self.health -= 5
+        if self.energy < 20:
+            self.health -= 3
+        if self.happiness < 20:
+            self.health -= 3
+
+        self.health = max(0, self.health)
+
+    def status(self):
+        print(f"\n--- {self.name}'s Status ---")
+        print(f"Hunger:    {self.hunger}")
+        print(f"Energy:    {self.energy}")
+        print(f"Happiness: {self.happiness}")
+        print(f"Health:    {self.health}")
+        print("---------------------------\n")

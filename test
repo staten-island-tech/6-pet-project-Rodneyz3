@@ -1,23 +1,21 @@
 def login(email,password):
-    if isinstance(email, str) == False:
+    if not isinstance(email, str):
         return "Must be a string"
     if "@" not in email:
         return "Must have @"
-    if isinstance(password,str) == False:
+    if not isinstance(password,str):
         return "Password must be a string"
     if len(password) < 8:
-        return "Must be at least 8 letters"
-    for char in password:
-        if char.isdigit == False:
-            return "Must have at least one number"
-    for char in password:
-        if char.isupper == False:
+        return " password Must be at least 8 letters"
+    if not any(ch.isdigit() for ch in password):
+        return "Must have at least one number"
+    if not any(ch.isupper() for ch in password):
             return "Must have at least one uppercase letter"
-    if isinstance(email, str) == True and isinstance(password,str) == True and len(password) <= 8 and char.isdigit == True and char.isupper == True:
-        return {
-            email: email
-            
-        }
+    return password
+    
+print(login("Ro@1e", "Sup"))
+
+
         
     
     
