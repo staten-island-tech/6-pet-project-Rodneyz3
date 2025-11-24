@@ -1,49 +1,81 @@
-class battlecat:
+class Pet:
     def __init__(self, name):
         self.name = name
-        self.hunger = 50
-        self.energy = 50
-        self.happiness = 50
-        self.health = 100
+        self.__strength = 50
+        self.__speed = 50
+        self.__energy = 50
+        self.__hunger= 50
 
-    def feed(self):
-        print(f"You feed {self.name}.")
-        self.hunger = max(0, self.hunger - 20)
-        self.happiness = min(100, self.happiness + 5)
 
-    def play(self):
-        print(f"You play with {self.name}.")
-        if self.energy <= 10:
-            print(f"{self.name} is too tired to play!")
+
+    def pushup(self):
+        if self.__energy == 10:
+            print(f"{self.name} is too tired to train!")
             return
-        self.happiness = min(100, self.happiness + 15)
-        self.energy = max(0, self.energy - 10)
-        self.hunger = min(100, self.hunger + 10)
+        self.__strength += 15
+        self.__energy -= 10
+        self.__hunger -=10
+        print(f"You played with {self.name}!")
+
+    def run(self):
+        if self.__speed <= 10:
+            print(f"{self.name} is already too tired!")
+            return
+        self.__speed += 15
+        self.__energy -= 10
+        self.__hunger -=10
+        print(f"You fed {self.name}!")
 
     def rest(self):
+        self.__energy += 20
+        self.__hunger -= 10
         print(f"{self.name} is resting...")
-        self.energy = min(100, self.energy + 25)
-        self.hunger = min(100, self.hunger + 5)
 
-    def tick(self):
-        self.hunger = min(100, self.hunger + 5)
-        self.energy = max(0, self.energy - 5)
-        self.happiness = max(0, self.happiness - 3)
+    def buffet(self):
+        self.hunger +=30
+        self.energy += 15
 
-       
-        if self.hunger > 80:
-            self.health -= 5
-        if self.energy < 20:
-            self.health -= 3
-        if self.happiness < 20:
-            self.health -= 3
+    def show_status(self):
+        print("\n--- PET STATUS ---")
+        print(f"Name: {self.name}")
+        print(f"Happiness: {self.__strength}")
+        print(f"Hunger: {self.__hunger}")
+        print(f"Energy: {self.__energy}")
+        print(f"Speed: {self.__speed}")
+    
 
-        self.health = max(0, self.health)
 
-    def status(self):
-        print(f"\n--- {self.name}'s Status ---")
-        print(f"Hunger:    {self.hunger}")
-        print(f"Energy:    {self.energy}")
-        print(f"Happiness: {self.happiness}")
-        print(f"Health:    {self.health}")
-        print("---------------------------\n")
+
+
+
+
+print(" Welcome to the Virtual Pet Game! ")
+pet_name = input("What would you like to name your pet? ")
+
+my_pet = Pet(pet_name)
+
+while True:
+    my_pet.show_status()
+    
+    print("What would you like to do?")
+    print("1. pushup")
+    print("2. run")
+    print("3. Rest")
+    print("4. buffet")
+    print("5. Quit")
+
+    choice = input("Choose an option (1–5): ")
+
+    if choice == "1":
+        my_pet.pushup()
+    elif choice == "2":
+        my_pet.run()
+    elif choice == "3":
+        my_pet.rest()
+    elif choice == "4":
+        my_pet.buffet()
+    elif choice == "5":
+        print(f"Goodbye! {pet_name} will miss you! 🥺")
+        break
+    else:
+        print("Invalid choice. Try again.")
