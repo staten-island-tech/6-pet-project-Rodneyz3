@@ -6,21 +6,15 @@ class Pet:
         self.__energy = 50
         self.__hunger= 50
 
-
-
     def pushup(self):
-        if self.__energy == 10:
-            print(f"{self.name} is too tired to train!")
-            return
         self.__strength += 15
         self.__energy -= 10
         self.__hunger -=10
         print(f"You played with {self.name}!")
+        if self.__energy == 10:
+            print("Take a rest")
 
     def run(self):
-        if self.__speed <= 10:
-            print(f"{self.name} is already too tired!")
-            return
         self.__speed += 15
         self.__energy -= 10
         self.__hunger -=10
@@ -42,6 +36,9 @@ class Pet:
         print(f"Hunger: {self.__hunger}")
         print(f"Energy: {self.__energy}")
         print(f"Speed: {self.__speed}")
+    
+
+
     
 
 
@@ -75,7 +72,8 @@ while True:
     elif choice == "4":
         my_pet.buffet()
     elif choice == "5":
-        print(f"Goodbye! {pet_name} will miss you! 🥺")
+        print(f"Goodbye! {pet_name} will miss you! ")
         break
     else:
         print("Invalid choice. Try again.")
+
