@@ -1,33 +1,50 @@
 class Pet:
-    def __init__(self, name,strength,speed,energy,hunger):
+    def __init__(self, name, strength, speed, energy, hunger):
         self.name = name
         self.__strength = strength
         self.__speed = speed
         self.__energy = energy
-        self.__hunger= hunger
+        self.__hunger = hunger
+    
+    def is_dead(self):
+        return self.__energy <= 0 or self.__hunger <= 0
+    
+    def __limit_stats(self):
+        self.__strength = max(0, min(self.__strength, 100))
+        self.__speed = max(0, min(self.__speed, 100))
+        self.__energy = max(0, min(self.__energy, 100))
+        self.__hunger = max(0, min(self.__hunger, 100))
 
     def pushup(self):
         self.__strength += 15
         self.__energy -= 10
-        self.__hunger -=10
+        self.__hunger -= 10
+        self.__limit_stats()
         print(f"You played with {self.name}!")
         if self.__energy <= 10:
             print("Take a rest")
+       
 
     def run(self):
         self.__speed += 15
         self.__energy -= 10
-        self.__hunger -=10
+        self.__hunger -= 10
+        self.__limit_stats()
         print(f"You fed {self.name}!")
+       
 
     def rest(self):
         self.__energy += 20
         self.__hunger -= 10
+        self.__limit_stats()
         print(f"{self.name} is resting...")
+        
 
     def buffet(self):
-        self.__hunger +=30
+        self.__hunger += 30
         self.__energy += 15
+        self.__limit_stats()
+        
 
     def show_status(self):
         print("\n--- PET STATUS ---")
@@ -36,7 +53,6 @@ class Pet:
         print(f"Hunger: {self.__hunger}")
         print(f"Energy: {self.__energy}")
         print(f"Speed: {self.__speed}")
-    
 
 
     
@@ -71,15 +87,26 @@ while True:
 
     if choice == "1":
         my_pet.pushup()
+        if my_pet.is_dead():
+            print(f"\n💀 {pet_name} has died... Hunger or energy reached 0.")
+            break
     elif choice == "2":
         my_pet.run()
+        if my_pet.is_dead():
+            print(f"\n💀 {pet_name} has died... Hunger or energy reached 0.")
+            break
     elif choice == "3":
         my_pet.rest()
+        if my_pet.is_dead():
+            print(f"\n💀 {pet_name} has died... Hunger or energy reached 0.")
+            break
     elif choice == "4":
         my_pet.buffet()
+        if my_pet.is_dead():
+            print(f"\n💀 {pet_name} has died... Hunger or energy reached 0.")
+            break
     elif choice == "5":
         print(f"Goodbye! {pet_name} will miss you! ")
         break
     else:
         print("Invalid choice. Try again.")
-
